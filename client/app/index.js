@@ -2,6 +2,7 @@ import 'babel-polyfill'
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
+import {Route} from 'react-router';
 
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
@@ -19,6 +20,10 @@ const store = createStore(
         loggerMiddleware
     )
 )
+
+const routes = <Route component={App}>
+    <Route path="/:boardId" component={App} />
+</Route>;
 
 store.dispatch(updateBoard('abc'))
 store.dispatch(addBoardItem('abc', {

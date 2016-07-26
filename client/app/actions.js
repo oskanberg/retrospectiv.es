@@ -32,8 +32,8 @@ export function addBoardItem(boardId, item) {
                 method: "POST",
                 body: JSON.stringify(item)
             })
-            .then(response => dispatch(updateBoard(boardId)))
             .catch(response => dispatch(boardItemAddError(boardId, response)))
+            .then(response => dispatch(updateBoard(boardId)))
     }
 }
 

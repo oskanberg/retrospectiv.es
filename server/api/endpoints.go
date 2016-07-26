@@ -21,7 +21,6 @@ func (a *api) GetAllBoardsHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 	}
 
-	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Write(response)
 }
 

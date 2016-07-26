@@ -3,6 +3,7 @@ package api
 import (
 	"net/http"
 
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/oskanberg/retrospectiv.es/server/models"
 )
@@ -38,6 +39,18 @@ func (a *api) Start() {
 			Pattern:     "/api/boards/{board_id}",
 			HandlerFunc: a.GetSpecificBoardHandler,
 		},
+		Route{
+			Name:        "SpecificBoardItems",
+			Method:      "GET",
+			Pattern:     "/api/boards/{board_id}/items",
+			HandlerFunc: a.GetSpecificBoardItemsHandler,
+		},
+		Route{
+			Name:        "AddItemToSpecificBoard",
+			Method:      "POST",
+			Pattern:     "/api/boards/{board_id}/items",
+			HandlerFunc: a.AddItemToSpecificBoard,
+		},
 	}
 
 	r := mux.NewRouter().StrictSlash(true)
@@ -49,7 +62,7 @@ func (a *api) Start() {
 			Handler(route.HandlerFunc)
 	}
 
-	http.ListenAndServe(":1123", r)
+	http.ListenAndServe(":1123", handlers.CORS()(r))
 }
 
 func NewBoardAPI() BoardAPI {

@@ -1,14 +1,34 @@
 package models
 
+/* Single board */
 type ItemBoard interface {
-}
-
-type ItemBoards interface {
-	GetBoard(string) (ItemBoard, bool)
+	AddItem(BoardItem)
+	GetItems() []BoardItem
 }
 
 type Board struct {
-	ID string `json:"id"`
+	ID    string      `json:"id"`
+	Items []BoardItem `json:"items"`
+}
+
+func (b *Board) AddItem(item BoardItem) {
+	b.Items = append(b.Items, item)
+}
+
+func (b *Board) GetItems() []BoardItem {
+	return b.Items
+}
+
+func NewItemBoard(id string) ItemBoard {
+	return &Board{
+		ID: id,
+	}
+}
+
+/* multiple boards */
+
+type ItemBoards interface {
+	GetBoard(string) (ItemBoard, bool)
 }
 
 type Boards map[string]ItemBoard
@@ -18,14 +38,10 @@ func (bs Boards) GetBoard(id string) (ItemBoard, bool) {
 	return board, ok
 }
 
-func NewItemBoard(id string) ItemBoard {
-	return &Board{
-		ID: id,
-	}
-}
-
 func NewItemBoards() ItemBoards {
-	board := Boards{}
-	board["123"] = NewItemBoard("123")
-	return board
+	boards := Boards{}
+	testBoard := NewItemBoard("abc")
+	boards["abc"] = testBoard
+
+	return boards
 }

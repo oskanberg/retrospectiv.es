@@ -128,3 +128,47 @@ func (a *api) AddItemToSpecificBoard(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 	w.Write([]byte("Created"))
 }
+
+/*
+ * Delete a specific item from
+ * DELETE /api/boards/{board_id}/items/{item_id}
+ */
+func (a *api) DeleteSpeificItemFromSpecificBoard(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	boardID, ok := vars["board_id"]
+
+	if !ok {
+		log.Println("Board ID not supplied")
+		http.Error(w, "Board ID not supplied.", http.StatusBadRequest)
+		return
+	}
+
+	itemID, ok := vars["item_id"]
+
+	if !ok {
+		log.Println("Item ID not supplied")
+		http.Error(w, "Item ID not supplied.", http.StatusBadRequest)
+		return
+	}
+
+	board, ok := a.boards.GetBoard(boardID)
+
+	if !ok {
+		log.Println("Board not found")
+		http.NotFound(w, r)
+		return
+	}
+
+	ok = board.DeleteItem(itemID)
+
+	if !ok {
+		log.Println("Item not found in board")
+		http.NotFound(w, r)
+		return
+	}
+
+	log.Println("Deleted item from board", boardID)
+
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("Created"))
+}

@@ -8,6 +8,7 @@ import (
 	"github.com/oskanberg/retrospectiv.es/server/models"
 )
 
+// Route represents an API route
 type Route struct {
 	Name        string
 	Method      string
@@ -15,8 +16,10 @@ type Route struct {
 	HandlerFunc http.HandlerFunc
 }
 
+// Routes respresents multiple routes
 type Routes []Route
 
+// BoardAPI in an interface for the BoardAPI commands
 type BoardAPI interface {
 	Start()
 }
@@ -65,6 +68,7 @@ func (a *api) Start() {
 	http.ListenAndServe(":1123", handlers.CORS()(r))
 }
 
+// NewBoardAPI returns a pointer to an implementation of BoardAPI
 func NewBoardAPI() BoardAPI {
 	return &api{
 		boards: models.NewItemBoards(),

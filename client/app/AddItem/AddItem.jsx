@@ -1,20 +1,12 @@
-import React, {PropTypes} from 'react'
-import Item from './Item'
-import FlatButton from 'material-ui/FlatButton';
-import {
-    Card,
-    CardActions,
-    CardHeader,
-    CardMedia,
-    CardTitle,
-    CardText
-} from 'material-ui/Card';
+import React, {PropTypes} from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
 
 const styles = {
     card: {
         'marginBottom': '2em'
     }
-}
+};
 
 const ItemList = ({items}) => (
     <div>

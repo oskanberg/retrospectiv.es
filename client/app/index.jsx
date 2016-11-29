@@ -10,7 +10,7 @@ import createLogger from 'redux-logger';
 import {createStore, applyMiddleware} from 'redux';
 import {selectBoard, invalidateBoard, updateBoard, addBoardItem} from './actions';
 import rootReducer from './reducers';
-import App from './components/App';
+import App from './App/App';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 

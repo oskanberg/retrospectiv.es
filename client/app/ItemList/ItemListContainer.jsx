@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import ItemList from '../components/ItemList';
+import ItemList from './ItemList';
 
 const mapStateToProps = (state) => {
     const {selectedBoard, boards} = state;

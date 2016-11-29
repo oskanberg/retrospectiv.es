@@ -1,6 +1,6 @@
-import React from 'react'
-import VisibleItemList from '../containers/VisibleItemList'
-import AddItem from '../containers/AddItem'
+import React from 'react';
+import VisibleItemList from '../ItemList/ItemListContainer';
+import AddItem from '../AddItem/AddItemContainer';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
@@ -19,6 +19,6 @@ const App = ({params: {
             </div>
         </div>
     </MuiThemeProvider>
-)
+);
 
-export default App
+export default App;

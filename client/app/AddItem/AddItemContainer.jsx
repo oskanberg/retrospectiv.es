@@ -11,7 +11,8 @@ class AddItem extends React.Component {
         super(props);
         this.dispatch = props.dispatch;
         this.state = {
-            value: ''
+            value: '',
+            category: ''
         };
 
         this.styles = {
@@ -22,20 +23,31 @@ class AddItem extends React.Component {
         };
     }
 
-    handleChange(event) {
-        this.setState({value: event.target.value});
+    handleItemChange(event) {
+        this.setState({
+            value: event.target.value,
+            category: this.state.category
+        });
+    }
+
+    handleCategoryChange(event) {
+        this.setState({
+            value: this.state.value,
+            category: event.target.value
+        });
     }
 
     handleClick() {
-        let value = this.state.value;
+        const value = this.state.value;
+        const category = this.state.category;
 
-        if (!value.trim()) {
+        if (!value.trim() || !category.trim()) {
             return;
         }
 
         this.dispatch(addBoardItem('abc', {
             content: value,
-            category: "test",
+            category: category,
             id: ""
         }));
 
@@ -46,7 +58,8 @@ class AddItem extends React.Component {
         return (
             <div className="row" style={this.styles.inputArea}>
                 <div className="col-md-10">
-                    <TextField value={this.state.value} hintText="Add an item" multiLine={true} fullWidth={true} onChange={this.handleChange.bind(this)}/>
+                    <TextField value={this.state.value} hintText="Add an item" multiLine={true} fullWidth={true} onChange={this.handleItemChange.bind(this)}/>
+                    <TextField value={this.state.category} hintText="Category" multiLine={false} fullWidth={true} onChange={this.handleCategoryChange.bind(this)}/>
                 </div>
                 <div className="col-md-2">
                     <RaisedButton label="Add" onClick={this.handleClick.bind(this)} primary={true}/>

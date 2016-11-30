@@ -19,7 +19,7 @@ const styles = {
 const ItemList = ({items}) => {
     return (
         <div>
-            {items.map(item => <div className="row" key={item.id}>
+            {items.map(item => <div key={item.id}>
                 <Card style={styles.card}>
                     <CardHeader title="Δ" subtitle={item.content} avatar="http://www.material-ui.com/images/jsa-128.jpg"/>
                     <CardActions>

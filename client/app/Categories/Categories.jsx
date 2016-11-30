@@ -9,10 +9,10 @@ const styles = {
 
 const Categories = ({itemsByCategory}) => {
     return (
-        <section id="categories">
+        <section id="categories" className="row">
             {Object.keys(itemsByCategory).map((category) => {
                 return (
-                    <section id="category" key={category}>
+                    <section id="category" key={category} className="col-md-6">
                         <h1>{category}</h1>
                         <ItemListContainer items={itemsByCategory[category]}/>
                     </section>

@@ -5,7 +5,7 @@ import {addBoardItem} from '../actions';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 
-class AddTodo extends React.Component {
+class AddItem extends React.Component {
 
     constructor(props) {
         super(props);
@@ -60,5 +60,5 @@ const mapStateToProps = (state) => {
     return {};
 };
 
-const cAddToDo = connect(mapStateToProps)(AddTodo);
-export default cAddToDo;
+const cAddItem = connect(mapStateToProps)(AddItem);
+export default cAddItem;

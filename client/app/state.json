@@ -1,19 +1,19 @@
 {
-    selectedBoard: 'sdfklasdflkasdfsdjf',
-    boards: {
-        'sdfklasdflkasdfsdjf': {
-            isFetching: false,
-            invalidated: true,
-            lastUpdated: 1439478405547,
-            items: [{
-                id: 'afefawefasefdf'
-                text: 'This is an item'
-                category: 'Plus'
+    "selectedBoard": "sdfklasdflkasdfsdjf",
+    "boards": {
+        "sdfklasdflkasdfsdjf": {
+            "isFetching": false,
+            "invalidated": true,
+            "lastUpdated": 1439478405547,
+            "items": [{
+                "id": "afefawefasefdf",
+                "text": "This is an item",
+                "category": "Plus"
             }, {
-                id: 'asdfasdfasdfsd'
-                text: 'This is another item'
-                category: 'Delta'
-            }, ]
+                "id": "asdfasdfasdfsd",
+                "text": "This is another item",
+                "category": "Delta"
+            } ]
         }
     }
 }

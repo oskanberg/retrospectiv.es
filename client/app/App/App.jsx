@@ -1,6 +1,7 @@
 import React from 'react';
-import VisibleItemList from '../ItemList/ItemListContainer';
+import ItemListContainer from '../ItemList/ItemListContainer';
 import AddItem from '../AddItem/AddItemContainer';
+import CategoriesContainer from '../Categories/CategoriesContainer';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
@@ -15,7 +16,7 @@ const App = ({params: {
             <AppBar title="retrospectiv.es"/>
             <div className="container">
                 <AddItem/>
-                <VisibleItemList/>
+                <CategoriesContainer/>
             </div>
         </div>
     </MuiThemeProvider>

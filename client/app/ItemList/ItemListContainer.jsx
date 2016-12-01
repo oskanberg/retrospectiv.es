@@ -2,12 +2,7 @@ import {connect} from 'react-redux';
 import ItemList from './ItemList';
 
 const mapStateToProps = (state) => {
-    const {selectedBoard, boards} = state;
-    const {items} = boards[selectedBoard] || {
-        items: []
-    };
-
-    return {'items': items};
+    return {};
 };
 
 const VisibleItemList = connect(mapStateToProps)(ItemList);

@@ -14,8 +14,6 @@ const mapStateToProps = (state) => {
         itemsByCategory[item.category].push(item);
     }
 
-    // /console.log(itemsByCategory);
-
     return {'itemsByCategory': itemsByCategory};
 };
 

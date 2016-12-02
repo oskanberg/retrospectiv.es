@@ -7,19 +7,21 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 
 const App = ({params: {
-        locationId
-    }, location: {
-        query
-    }}) => (
-    <MuiThemeProvider>
-        <div>
-            <AppBar title="retrospectiv.es"/>
-            <div className="container">
-                <AddItem/>
-                <CategoriesContainer/>
+        boardId
+    }, children}) => {
+
+    console.log(boardId);
+
+    return (
+        <MuiThemeProvider>
+            <div>
+                <AppBar title="retrospectiv.es"/>
+                <div className="container">
+                    {children}
+                </div>
             </div>
-        </div>
-    </MuiThemeProvider>
-);
+        </MuiThemeProvider>
+    );
+};
 
 export default App;

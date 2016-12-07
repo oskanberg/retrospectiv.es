@@ -8,7 +8,6 @@ import {createNewBoard} from '../actions';
 class NewBoard extends React.Component {
 
     constructor(props) {
-        console.log(props);
         super(props);
         this.dispatch = props.dispatch;
 
@@ -41,22 +40,23 @@ class NewBoard extends React.Component {
 
     addNewBoard(e) {
         this.dispatch(createNewBoard(this.state.name));
+        e.preventDefault();
     }
 
     render() {
         return (
-            <div>
+            <form onSubmit={this.addNewBoard.bind(this)}>
                 <div className="row" style={this.styles.inputArea}>
                     <div className="col-md-8 col-md-offset-2">
-                        <TextField value={this.state.name} hintText="Board name" multiLine={true} fullWidth={true} onChange={this.updateNameInput.bind(this)}/>
+                        <TextField value={this.state.name} hintText="Board name" multiLine={false} fullWidth={true} onChange={this.updateNameInput.bind(this)}/>
                     </div>
                 </div>
                 <div className="row" style={this.styles.buttonArea}>
                     <div className="col-md-8 col-md-offset-2">
-                        <RaisedButton label="Add New Board" onClick={this.addNewBoard.bind(this)} style={this.styles.button} primary={true}/>
+                        <RaisedButton type="submit" label="Add New Board" style={this.styles.button} primary={true}/>
                     </div>
                 </div>
-            </div>
+            </form>
         );
     }
 

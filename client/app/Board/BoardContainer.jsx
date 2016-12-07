@@ -3,7 +3,7 @@ import AddItem from '../AddItem/AddItemContainer';
 import CategoriesContainer from '../Categories/CategoriesContainer';
 import {connect} from 'react-redux';
 import Board from './Board';
-import {selectBoard} from '../actions';
+import {selectBoard, updateBoard} from '../actions';
 
 class BoardContainer extends React.Component {
     constructor(props) {
@@ -13,6 +13,7 @@ class BoardContainer extends React.Component {
     }
 
     componentWillMount() {
+        this.dispatch(updateBoard(this.id));
         this.dispatch(selectBoard(this.id));
     }
 

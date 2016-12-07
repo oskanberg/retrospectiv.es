@@ -10,8 +10,6 @@ const App = ({params: {
         boardId
     }, children}) => {
 
-    console.log(boardId);
-
     return (
         <MuiThemeProvider>
             <div>

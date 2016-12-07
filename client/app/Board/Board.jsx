@@ -2,10 +2,7 @@ import React from 'react';
 import AddItem from '../AddItem/AddItemContainer';
 import CategoriesContainer from '../Categories/CategoriesContainer';
 
-const App = ({params: {
-        boardId
-    }}) => {
-
+const Board = () => {
     return (
         <div>
             <AddItem/>
@@ -14,4 +11,4 @@ const App = ({params: {
     );
 };
 
-export default App;
+export default Board;

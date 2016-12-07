@@ -9,6 +9,7 @@ class AddItem extends React.Component {
 
     constructor(props) {
         super(props);
+        this.selectedBoard = props.selectedBoard;
         this.dispatch = props.dispatch;
         this.state = {
             value: '',
@@ -24,17 +25,11 @@ class AddItem extends React.Component {
     }
 
     handleItemChange(event) {
-        this.setState({
-            value: event.target.value,
-            category: this.state.category
-        });
+        this.setState({value: event.target.value, category: this.state.category});
     }
 
     handleCategoryChange(event) {
-        this.setState({
-            value: this.state.value,
-            category: event.target.value
-        });
+        this.setState({value: this.state.value, category: event.target.value});
     }
 
     handleClick() {
@@ -45,7 +40,7 @@ class AddItem extends React.Component {
             return;
         }
 
-        this.dispatch(addBoardItem('abc', {
+        this.dispatch(addBoardItem(this.selectedBoard, {
             content: value,
             category: category,
             id: ""
@@ -69,8 +64,8 @@ class AddItem extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {};
+const mapStateToProps = (state, ownProps) => {
+    return {selectedBoard: state.selectedBoard};
 };
 
 const cAddItem = connect(mapStateToProps)(AddItem);

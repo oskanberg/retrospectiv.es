@@ -2,8 +2,8 @@ import React, {PropTypes} from 'react';
 import ItemListContainer from '../ItemList/ItemListContainer';
 
 const styles = {
-    card: {
-        'marginBottom': '2em'
+    categoryHeader: {
+        'marginBottom': '1em'
     }
 };
 
@@ -13,7 +13,7 @@ const Categories = ({itemsByCategory}) => {
             {Object.keys(itemsByCategory).map((category) => {
                 return (
                     <section id="category" key={category} className="col-md-6">
-                        <h1>{category}</h1>
+                        <h1 style={styles.categoryHeader}>{category}</h1>
                         <ItemListContainer items={itemsByCategory[category]}/>
                     </section>
                 );

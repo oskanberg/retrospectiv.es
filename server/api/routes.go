@@ -21,14 +21,14 @@ type Routes []Route
 
 // BoardAPI in an interface for the BoardAPI commands
 type BoardAPI interface {
-	Start()
+	Start(string)
 }
 
 type api struct {
 	boards models.ItemBoards
 }
 
-func (a *api) Start() {
+func (a *api) Start(port string) {
 	var routes = Routes{
 		Route{
 			Name:        "Boards",
@@ -54,7 +54,15 @@ func (a *api) Start() {
 			Pattern:     "/api/boards/{board_id}/items",
 			HandlerFunc: a.AddItemToSpecificBoard,
 		},
+		Route{
+			Name:        "AddNewBoard",
+			Method:      "POST",
+			Pattern:     "/api/boards",
+			HandlerFunc: a.AddNewBoard,
+		},
 	}
+
+	// AddNewBoard
 
 	r := mux.NewRouter().StrictSlash(true)
 	for _, route := range routes {
@@ -65,7 +73,7 @@ func (a *api) Start() {
 			Handler(route.HandlerFunc)
 	}
 
-	http.ListenAndServe(":1123", handlers.CORS()(r))
+	http.ListenAndServe(port, handlers.CORS()(r))
 }
 
 // NewBoardAPI returns a pointer to an implementation of BoardAPI

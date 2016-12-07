@@ -21,6 +21,8 @@ func (a *api) GetAllBoardsHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 	}
 
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusFound)
 	w.Write(response)
 }
 
@@ -53,6 +55,8 @@ func (a *api) GetSpecificBoardHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusFound)
 	w.Write(response)
 }
 
@@ -85,6 +89,8 @@ func (a *api) GetSpecificBoardItemsHandler(w http.ResponseWriter, r *http.Reques
 		return
 	}
 
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusFound)
 	w.Write(response)
 }
 
@@ -170,5 +176,35 @@ func (a *api) DeleteSpeificItemFromSpecificBoard(w http.ResponseWriter, r *http.
 	log.Println("Deleted item from board", boardID)
 
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Created"))
+	w.Write([]byte("Deleted"))
+}
+
+/*
+ * Create a new board
+ * POST /api/boards/
+ */
+func (a *api) AddNewBoard(w http.ResponseWriter, r *http.Request) {
+	var newItem = &models.Board{}
+
+	decoder := json.NewDecoder(r.Body)
+	err := decoder.Decode(newItem)
+	if err != nil {
+		log.Println("Invalid board object", err)
+		http.Error(w, "Invalid board object", http.StatusBadRequest)
+		return
+	}
+
+	newBoard := a.boards.CreateNewBoard(newItem.GetTitle())
+	log.Println("Added new board", newItem.GetTitle())
+
+	response, err := json.Marshal(newBoard)
+	if err != nil {
+		log.Fatal(err)
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(response)
 }

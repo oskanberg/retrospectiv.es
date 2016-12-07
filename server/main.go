@@ -1,8 +1,13 @@
 package main
 
-import "github.com/oskanberg/retrospectiv.es/server/api"
+import (
+	"fmt"
+
+	"github.com/oskanberg/retrospectiv.es/server/api"
+)
 
 func main() {
 	api := api.NewBoardAPI()
-	api.Start()
+	fmt.Println("Server starting ...")
+	api.Start(":1123")
 }

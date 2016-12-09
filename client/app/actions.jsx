@@ -33,7 +33,7 @@ export function invalidateBoard(boardId) {
 export function addBoardItem(boardId, item) {
     return dispatch => {
         dispatch(requestBoardItemAdd(boardId, item));
-        return fetch(`http://localhost:1123/api/boards/${boardId}/items`, {
+        return fetch(`//api.retrospectiv.es/api/boards/${boardId}/items`, {
             method: "POST",
             body: JSON.stringify(item)
         }).catch(response => dispatch(boardItemAddError(boardId, response))).then(response => dispatch(updateBoard(boardId)));
@@ -43,14 +43,14 @@ export function addBoardItem(boardId, item) {
 export function updateBoard(boardId) {
     return dispatch => {
         dispatch(requestBoardUpdate(boardId));
-        return fetch(`http://localhost:1123/api/boards/${boardId}`).then(response => response.json()).then(json => dispatch(receiveBoardUpdate(boardId, json)));
+        return fetch(`//api.retrospectiv.es/api/boards/${boardId}`).then(response => response.json()).then(json => dispatch(receiveBoardUpdate(boardId, json)));
     };
 }
 
 export function createNewBoard(boardName) {
     return dispatch => {
         dispatch(requestNewBoard(boardName));
-        return fetch('http://localhost:1123/api/boards', {
+        return fetch('//api.retrospectiv.es/api/boards', {
             method: "POST",
             body: JSON.stringify({Title: boardName})
         }).catch(response => dispatch(newBoardError(response))).then(response => response.json()).then(response => {

@@ -2,6 +2,7 @@ package api
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
@@ -66,11 +67,12 @@ func (a *api) Start(port string) {
 
 	r := mux.NewRouter().StrictSlash(true)
 	for _, route := range routes {
+		log := handlers.LoggingHandler(os.Stdout, route.HandlerFunc)
 		r.
 			Methods(route.Method).
 			Path(route.Pattern).
 			Name(route.Name).
-			Handler(route.HandlerFunc)
+			Handler(log)
 	}
 
 	http.ListenAndServe(port, handlers.CORS()(r))

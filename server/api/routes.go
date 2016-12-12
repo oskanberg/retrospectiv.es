@@ -65,16 +65,16 @@ func (a *api) Start(port string) {
 
 	r := mux.NewRouter().StrictSlash(true)
 	for _, route := range routes {
-		log := handlers.LoggingHandler(os.Stdout, route.HandlerFunc)
-		cors := handlers.CORS()(log)
 		r.
 			Methods(route.Method).
 			Path(route.Pattern).
 			Name(route.Name).
-			Handler(cors)
+			Handler(route.HandlerFunc)
 	}
 
-	http.ListenAndServe(port, handlers.CORS()(r))
+	log := handlers.LoggingHandler(os.Stdout, r)
+	cors := handlers.CORS()(log)
+	http.ListenAndServe(port, cors)
 }
 
 // NewBoardAPI returns a pointer to an implementation of BoardAPI

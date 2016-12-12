@@ -63,16 +63,15 @@ func (a *api) Start(port string) {
 		},
 	}
 
-	// AddNewBoard
-
 	r := mux.NewRouter().StrictSlash(true)
 	for _, route := range routes {
 		log := handlers.LoggingHandler(os.Stdout, route.HandlerFunc)
+		cors := handlers.CORS()(log)
 		r.
 			Methods(route.Method).
 			Path(route.Pattern).
 			Name(route.Name).
-			Handler(log)
+			Handler(cors)
 	}
 
 	http.ListenAndServe(port, handlers.CORS()(r))

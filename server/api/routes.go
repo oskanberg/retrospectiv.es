@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 
@@ -74,7 +75,7 @@ func (a *api) Start(port string) {
 
 	log := handlers.LoggingHandler(os.Stdout, r)
 	cors := handlers.CORS()(log)
-	http.ListenAndServe(port, cors)
+	fmt.Println(http.ListenAndServe(port, cors))
 }
 
 // NewBoardAPI returns a pointer to an implementation of BoardAPI

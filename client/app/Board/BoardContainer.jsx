@@ -1,6 +1,4 @@
 import React from 'react';
-import AddItem from '../AddItem/AddItemContainer';
-import CategoriesContainer from '../Categories/CategoriesContainer';
 import {connect} from 'react-redux';
 import Board from './Board';
 import {selectBoard, updateBoard} from '../actions';
@@ -8,6 +6,7 @@ import {selectBoard, updateBoard} from '../actions';
 class BoardContainer extends React.Component {
     constructor(props) {
         super(props);
+
         this.dispatch = props.dispatch;
         this.id = props.id;
     }
@@ -18,12 +17,20 @@ class BoardContainer extends React.Component {
     }
 
     render() {
-        return <Board></Board>;
+        return <Board itemsByCategory={this.props.itemsByCategory}></Board>;
     }
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return {id: ownProps.params.boardId};
+    const {boards} = state;
+    const board = boards[ownProps.params.boardId] || [];
+    const boardItems = board.items || [];
+    let itemsByCategory = {};
+    for (let item of boardItems) {
+        itemsByCategory[item.category] = itemsByCategory[item.category] || [];
+        itemsByCategory[item.category].push(item);
+    }
+    return {id: ownProps.params.boardId, itemsByCategory: itemsByCategory};
 };
 
 export default connect(mapStateToProps)(BoardContainer);

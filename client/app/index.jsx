@@ -17,6 +17,7 @@ import BoardContainer from './Board/BoardContainer';
 import NewBoard from './NewBoard/NewBoard';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import 'material-design-icons';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941

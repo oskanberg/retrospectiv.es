@@ -9,5 +9,5 @@ import (
 func main() {
 	api := api.NewBoardAPI()
 	fmt.Println("Server starting ...")
-	api.Start(":1123")
+	api.Start(":1125")
 }

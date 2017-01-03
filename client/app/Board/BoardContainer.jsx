@@ -6,14 +6,11 @@ import {selectBoard, updateBoard} from '../actions';
 class BoardContainer extends React.Component {
     constructor(props) {
         super(props);
-
-        this.dispatch = props.dispatch;
-        this.id = props.id;
     }
 
     componentWillMount() {
-        this.dispatch(updateBoard(this.id));
-        this.dispatch(selectBoard(this.id));
+        this.props.dispatch(updateBoard(this.props.id));
+        this.props.dispatch(selectBoard(this.props.id));
     }
 
     render() {

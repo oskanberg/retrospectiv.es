@@ -1,6 +1,5 @@
 import React from 'react';
 import ItemListContainer from '../ItemList/ItemListContainer';
-import AddItem from '../AddItem/AddItemContainer';
 import BoardContainer from '../Board/BoardContainer';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -13,7 +12,7 @@ const App = ({params: {
     return (
         <MuiThemeProvider>
             <div>
-                <AppBar title="retrospectiv.es" zDepth={0}/>
+                <AppBar title="retrospectiv.es" style={{position: 'fixed'}} zDepth={0}/>
                 {children}
             </div>
         </MuiThemeProvider>

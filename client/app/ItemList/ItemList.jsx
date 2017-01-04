@@ -20,7 +20,7 @@ const getDeterministicRandom = (i) => {
     return i % 12345;
 };
 
-const ItemList = ({items}) => {
+const ItemList = ({items, onItemDelete}) => {
     return (
         <div>
             {items.map((item, index) => <div key={item.id}>
@@ -30,7 +30,7 @@ const ItemList = ({items}) => {
                         {item.content}
                     </CardText>
                     <CardActions>
-                        <FlatButton label="Delete"/>
+                        <FlatButton label="Delete" onClick={() => onItemDelete(item.id)}/>
                         <FlatButton label="Edit"/>
                     </CardActions>
                 </Card>

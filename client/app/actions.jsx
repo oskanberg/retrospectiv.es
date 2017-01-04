@@ -11,6 +11,9 @@ export const INVALIDATE_BOARD = 'INVALIDATE_BOARD';
 export const REQUEST_BOARD_UPDATE = 'REQUEST_BOARD_UPDATE';
 export const RECEIVE_BOARD_UPDATE = 'RECEIVE_BOARD_UPDATE';
 
+export const REQUEST_BOARD_ITEM_DELETE = 'REQUEST_BOARD_ITEM_DELETE';
+export const BOARD_ITEM_DELETE_ERROR = 'BOARD_ITEM_DELETE_ERROR';
+
 export const REQUEST_BOARD_ITEM_ADD = 'REQUEST_BOARD_ITEM_ADD';
 export const BOARD_ITEM_ADD_ERROR = 'BOARD_ITEM_ADD_ERROR';
 
@@ -26,10 +29,6 @@ export function selectBoard(boardId) {
     return {type: SELECT_BOARD, boardId};
 }
 
-export function invalidateBoard(boardId) {
-    return {type: INVALIDATE_BOARD, boardId};
-}
-
 export function addBoardItem(boardId, item) {
     return dispatch => {
         dispatch(requestBoardItemAdd(boardId, item));
@@ -37,6 +36,14 @@ export function addBoardItem(boardId, item) {
             method: "POST",
             body: JSON.stringify(item)
         }).catch(response => dispatch(boardItemAddError(boardId, response))).then(response => dispatch(updateBoard(boardId)));
+    };
+}
+
+export function deleteBoardItem(boardId, itemId) {
+    return dispatch => {
+        return fetch(`https://api.retrospectiv.es/api/boards/${boardId}/items/${itemId}`, {
+            method: "DELETE"
+        }).catch(response => dispatch(boardItemDeleteError(boardId, itemId, response))).then(response => dispatch(updateBoard(boardId)));
     };
 }
 
@@ -59,6 +66,14 @@ export function createNewBoard(boardName) {
             dispatch(push(`/board/${response.id}`));
         });
     };
+}
+
+function requestBoardItemDelete(boardId, item) {
+    return {type: REQUEST_BOARD_ITEM_DELETE, boardId, item};
+}
+
+function boardItemDeleteError(boardId, itemId, error) {
+    return {type: BOARD_ITEM_ADD_ERROR, boardId, itemId, error};
 }
 
 function requestBoardItemAdd(boardId, item) {

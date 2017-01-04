@@ -39,13 +39,13 @@ func (a *api) Start(port string) {
 			HandlerFunc: a.GetAllBoardsHandler,
 		},
 		Route{
-			Name:        "SpecificBoard",
+			Name:        "GetSpecificBoard",
 			Method:      "GET",
 			Pattern:     "/api/boards/{board_id}",
 			HandlerFunc: a.GetSpecificBoardHandler,
 		},
 		Route{
-			Name:        "SpecificBoardItems",
+			Name:        "GetSpecificBoardItems",
 			Method:      "GET",
 			Pattern:     "/api/boards/{board_id}/items",
 			HandlerFunc: a.GetSpecificBoardItemsHandler,
@@ -62,6 +62,12 @@ func (a *api) Start(port string) {
 			Pattern:     "/api/boards",
 			HandlerFunc: a.AddNewBoard,
 		},
+		Route{
+			Name:        "DeleteSpeificItemFromSpecificBoard",
+			Method:      "DELETE",
+			Pattern:     "/api/boards/{board_id}/items/{item_id}",
+			HandlerFunc: a.DeleteSpeificItemFromSpecificBoard,
+		},
 	}
 
 	r := mux.NewRouter().StrictSlash(true)
@@ -73,8 +79,9 @@ func (a *api) Start(port string) {
 			Handler(route.HandlerFunc)
 	}
 
+	methods := []string{"GET", "POST", "PUT", "DELETE"}
 	log := handlers.LoggingHandler(os.Stdout, r)
-	cors := handlers.CORS()(log)
+	cors := handlers.CORS(handlers.AllowedMethods(methods))(log)
 	fmt.Println(http.ListenAndServe(port, cors))
 }
 

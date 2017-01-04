@@ -1,72 +1,33 @@
 import React from 'react';
-import {Component} from 'react';
-import {connect} from 'react-redux';
+import AddItem from './AddItem';
 import {addBoardItem} from '../actions';
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
+import {connect} from 'react-redux';
 
-class AddItem extends React.Component {
-
+class AddItemContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.selectedBoard = props.selectedBoard;
-        this.dispatch = props.dispatch;
-        this.state = {
-            value: '',
-            category: ''
-        };
-
-        this.styles = {
-            inputArea: {
-                'marginBottom': '2em',
-                'marginTop': '2em'
-            }
-        };
-    }
-
-    handleItemChange(event) {
-        this.setState({value: event.target.value, category: this.state.category});
-    }
-
-    handleCategoryChange(event) {
-        this.setState({value: this.state.value, category: event.target.value});
-    }
-
-    handleClick() {
-        const value = this.state.value;
-        const category = this.state.category;
-
-        if (!value.trim() || !category.trim()) {
-            return;
-        }
-
-        this.dispatch(addBoardItem(this.selectedBoard, {
-            content: value,
-            category: category,
-            id: ""
-        }));
-
-        this.state.value = '';
     }
 
     render() {
-        return (
-            <div className="row" style={this.styles.inputArea}>
-                <div className="col-md-10">
-                    <TextField value={this.state.value} hintText="Add an item" multiLine={true} fullWidth={true} onChange={this.handleItemChange.bind(this)}/>
-                    <TextField value={this.state.category} hintText="Category" multiLine={false} fullWidth={true} onChange={this.handleCategoryChange.bind(this)}/>
-                </div>
-                <div className="col-md-2">
-                    <RaisedButton label="Add" onClick={this.handleClick.bind(this)} primary={true}/>
-                </div>
-            </div>
-        );
+        const onAddItem = (value, category) => {
+            this.props.dispatch(addBoardItem(this.props.selectedBoard, {
+                content: value,
+                category: category,
+                id: ""
+            }));
+            this.props.router.push(`/board/${this.props.selectedBoard}`);
+        };
+
+        const onViewClose = () => {
+            this.props.router.push(`/board/${this.props.selectedBoard}`);
+        };
+
+        return <AddItem selectedBoard={this.props.selectedBoard} onAddItem={onAddItem.bind(this)} onViewClose={onViewClose.bind(this)}/>;
     }
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return {selectedBoard: state.selectedBoard};
+    return {selectedBoard: ownProps.params.boardId};
 };
 
-const cAddItem = connect(mapStateToProps)(AddItem);
-export default cAddItem;
+export default connect(mapStateToProps)(AddItemContainer);

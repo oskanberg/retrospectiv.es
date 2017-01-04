@@ -14,7 +14,8 @@ class BoardContainer extends React.Component {
     }
 
     render() {
-        return <Board itemsByCategory={this.props.itemsByCategory}></Board>;
+        console.log(this.context);
+        return <Board itemsByCategory={this.props.itemsByCategory} selectedBoard={this.props.id}></Board>;
     }
 }
 

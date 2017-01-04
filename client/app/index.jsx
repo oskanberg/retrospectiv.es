@@ -15,6 +15,7 @@ import App from './App/App';
 
 import BoardContainer from './Board/BoardContainer';
 import NewBoard from './NewBoard/NewBoard';
+import AddItemContainer from './AddItem/AddItemContainer';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import 'material-design-icons';
@@ -33,7 +34,10 @@ render(
     <Router history={browserHistory}>
         <Route path="/" component={App}>
             <IndexRoute component={NewBoard}/>
-            <Route path="/board/:boardId" component={BoardContainer}/>
+            <Route path="/board/:boardId">
+                <IndexRoute component={BoardContainer}/>
+                <Route path="add(/:category)" component={AddItemContainer}/>
+            </Route>
             <Route path="/new" component={NewBoard}/>
         </Route>
     </Router>

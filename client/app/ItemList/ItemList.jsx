@@ -21,7 +21,10 @@ const ItemList = ({items}) => {
         <div>
             {items.map(item => <div key={item.id}>
                 <Card style={styles.card}>
-                    <CardHeader subtitle={item.content} avatar="https://api.adorable.io/avatars/500/abott@adorable.png"/>
+                    <CardHeader avatar="https://api.adorable.io/avatars/500/abott@adorable.png"/>
+                    <CardText>
+                        {item.content}
+                    </CardText>
                     <CardActions>
                         <FlatButton label="Delete"/>
                         <FlatButton label="Edit"/>

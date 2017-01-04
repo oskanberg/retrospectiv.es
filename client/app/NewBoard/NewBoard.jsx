@@ -14,7 +14,8 @@ class NewBoard extends React.Component {
         this.styles = {
             inputArea: {
                 'marginBottom': '2em',
-                'marginTop': '2em'
+                'marginTop': '7em',
+                'padding': '1em'
             },
             buttonArea: {
                 'width': '100%',
@@ -31,7 +32,6 @@ class NewBoard extends React.Component {
         this.state = {
             name: ''
         };
-
     }
 
     updateNameInput(e) {
@@ -47,12 +47,8 @@ class NewBoard extends React.Component {
         return (
             <form onSubmit={this.addNewBoard.bind(this)}>
                 <div className="row" style={this.styles.inputArea}>
-                    <div className="col-md-8 col-md-offset-2">
-                        <TextField value={this.state.name} hintText="Board name" multiLine={false} fullWidth={true} onChange={this.updateNameInput.bind(this)}/>
-                    </div>
-                </div>
-                <div className="row" style={this.styles.buttonArea}>
-                    <div className="col-md-8 col-md-offset-2">
+                    <div className="col-xs-12 col-md-6 col-md-offset-3">
+                        <TextField value={this.state.name} floatingLabelText="Enter Board Name" multiLine={false} fullWidth={true} onChange={this.updateNameInput.bind(this)}/>
                         <RaisedButton type="submit" label="Add New Board" style={this.styles.button} primary={true}/>
                     </div>
                 </div>

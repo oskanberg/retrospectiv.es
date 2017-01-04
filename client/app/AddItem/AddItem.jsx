@@ -28,7 +28,7 @@ class AddItem extends React.Component {
         super(props);
         this.state = {
             value: '',
-            category: ''
+            category: this.props.selectedCategory
         };
     }
 
@@ -56,11 +56,10 @@ class AddItem extends React.Component {
             <div>
                 <AppBar title={"Add New Item"} iconElementLeft={(
                     <IconButton onClick={this.props.onViewClose}><NavigationClose/></IconButton>
-                )} iconElementRight={(<FlatButton label="Add" onClick={this.addItem.bind(this)}/>)}></AppBar>
+                )} iconElementRight={(<FlatButton label="Save" onClick={this.addItem.bind(this)}/>)}></AppBar>
 
                 <div className="col-xs-12 col-md-6 col-md-offset-3" style={styles.inputArea}>
-                    <TextField value={this.state.value} hintText="Add an item" multiLine={true} fullWidth={true} onChange={this.handleItemChange.bind(this)}/>
-                    <TextField value={this.state.category} hintText="Category" multiLine={false} fullWidth={true} onChange={this.handleCategoryChange.bind(this)}/>
+                    <TextField value={this.state.value} multiLine={true} rows={3} floatingLabelText="Enter Item Text" multiLine={true} fullWidth={true} onChange={this.handleItemChange.bind(this)}/>
                 </div>
             </div>
         );

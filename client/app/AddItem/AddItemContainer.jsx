@@ -22,12 +22,12 @@ class AddItemContainer extends React.Component {
             this.props.router.push(`/board/${this.props.selectedBoard}`);
         };
 
-        return <AddItem selectedBoard={this.props.selectedBoard} onAddItem={onAddItem.bind(this)} onViewClose={onViewClose.bind(this)}/>;
+        return <AddItem selectedBoard={this.props.selectedBoard} selectedCategory={this.props.category} onAddItem={onAddItem.bind(this)} onViewClose={onViewClose.bind(this)}/>;
     }
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return {selectedBoard: ownProps.params.boardId};
+    return {selectedBoard: ownProps.params.boardId, category: ownProps.params.category};
 };
 
 export default connect(mapStateToProps)(AddItemContainer);

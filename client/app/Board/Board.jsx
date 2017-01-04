@@ -31,6 +31,19 @@ let styles = {
     }
 };
 
+const tabs = [
+    {
+        id: 'plus',
+        icon: 'add'
+    }, {
+        id: 'delta',
+        icon: 'change_history'
+    }, {
+        id: 'action',
+        icon: 'playlist_add_check'
+    }
+];
+
 export default class Board extends React.Component {
 
     constructor(props) {
@@ -44,40 +57,20 @@ export default class Board extends React.Component {
         this.setState({slideIndex: value});
     }
 
-    // componentDidMount() {
-    //     window.addEventListener('resize', () => {
-    //         console.log('force updating');
-    //         styles.swipeableContainer.height = window.innerHeight;
-    //         this.forceUpdate();
-    //     });
-    // }
-
     render() {
         return (
             <div>
                 <Tabs onChange={this.handleChange.bind(this)} value={this.state.slideIndex} style={styles.tabs}>
-                    <Tab icon={(
-                        <FontIcon className="material-icons">add</FontIcon>
-                    )} value={0}/>
-                    <Tab icon={(
-                        <FontIcon className="material-icons">change_history</FontIcon>
-                    )} value={1}/>
-                    <Tab icon={(
-                        <FontIcon className="material-icons">playlist_add_check</FontIcon>
-                    )} value={2}/>
+                    {tabs.map((tab, i) => <Tab icon={(
+                        <FontIcon className="material-icons">{tab.icon}</FontIcon>
+                    )} value={i} key={tab.id}/>)}
                 </Tabs>
                 <SwipeableViews animateHeight={true} index={this.state.slideIndex} containerStyle={styles.swipeableContainer} onChangeIndex={this.handleChange.bind(this)}>
-                    <section id="plus" key="plus" style={styles.itemsSection} className="col-md-6 col-md-offset-3">
-                        {!!this.props.itemsByCategory["plus"] && <ItemListContainer items={this.props.itemsByCategory["plus"]}/>}
-                    </section>
-                    <section id="delta" key="delta" style={styles.itemsSection} className="col-md-6 col-md-offset-3">
-                        {!!this.props.itemsByCategory["delta"] && <ItemListContainer items={this.props.itemsByCategory["delta"]}/>}
-                    </section>
-                    <section id="actions" key="actions" style={styles.itemsSection} className="col-md-6 col-md-offset-3">
-                        {!!this.props.itemsByCategory["actions"] && <ItemListContainer items={this.props.itemsByCategory["actions"]}/>}
-                    </section>
+                    {tabs.map((tab, i) => <section id={tab.id} key={tab.id} style={styles.itemsSection} className="col-md-6 col-md-offset-3">
+                        {!!this.props.itemsByCategory[tab.id] && <ItemListContainer items={this.props.itemsByCategory[tab.id]}/>}
+                    </section>)}
                 </SwipeableViews>
-                <Link to={`/board/${this.props.selectedBoard}/add`}>
+                <Link to={`/board/${this.props.selectedBoard}/add/${tabs[this.state.slideIndex].id}`}>
                     <FloatingActionButton secondary={true} style={styles.addNewButton}>
                         <ContentAdd/>
                     </FloatingActionButton>

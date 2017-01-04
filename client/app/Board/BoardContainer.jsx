@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import Board from './Board';
 import {selectBoard, updateBoard} from '../actions';
 
+const UPDATE_INTERVAL_MS = 7500;
+
 class BoardContainer extends React.Component {
     constructor(props) {
         super(props);
@@ -11,6 +13,17 @@ class BoardContainer extends React.Component {
     componentWillMount() {
         this.props.dispatch(updateBoard(this.props.id));
         this.props.dispatch(selectBoard(this.props.id));
+    }
+
+    componentDidMount() {
+        let intervalId = setInterval(() => {
+            this.props.dispatch(updateBoard(this.props.id));
+        }, UPDATE_INTERVAL_MS);
+        this.setState({intervalId: intervalId});
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.state.intervalId);
     }
 
     render() {

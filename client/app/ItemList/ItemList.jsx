@@ -16,16 +16,16 @@ const styles = {
     }
 };
 
-const getRandomInteger = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+const getDeterministicRandom = (i) => {
+    return i % 12345;
 };
 
 const ItemList = ({items}) => {
     return (
         <div>
-            {items.map(item => <div key={item.id}>
+            {items.map((item, index) => <div key={item.id}>
                 <Card style={styles.card}>
-                    <CardHeader avatar={`https://api.adorable.io/avatars/50/${getRandomInteger(0, 1000)}`}/>
+                    <CardHeader avatar={`https://api.adorable.io/avatars/50/${getDeterministicRandom(index)}`}/>
                     <CardText>
                         {item.content}
                     </CardText>

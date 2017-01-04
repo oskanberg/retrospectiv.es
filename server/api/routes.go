@@ -79,7 +79,7 @@ func (a *api) Start(port string) {
 			Handler(route.HandlerFunc)
 	}
 
-	methods := []string{"GET", "POST", "PUT", "DELETE"}
+	methods := []string{"GET", "OPTIONS", "POST", "PUT", "DELETE"}
 	log := handlers.LoggingHandler(os.Stdout, r)
 	cors := handlers.CORS(handlers.AllowedMethods(methods))(log)
 	fmt.Println(http.ListenAndServe(port, cors))

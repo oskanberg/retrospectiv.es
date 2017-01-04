@@ -40,6 +40,7 @@ class App extends React.Component {
     }
 
     handleHome() {
+        this.handleDrawerClose();
         this.props.router.push('/');
     }
 

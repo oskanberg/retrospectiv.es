@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
-import Item from '../Item/Item';
-import FlatButton from 'material-ui/FlatButton';
+import IconButton from 'material-ui/IconButton';
+import ActionDelete from 'material-ui/svg-icons/action/delete';
 import {
     Card,
     CardActions,
@@ -30,8 +30,9 @@ const ItemList = ({items, onItemDelete}) => {
                         {item.content}
                     </CardText>
                     <CardActions>
-                        <FlatButton label="Delete" onClick={() => onItemDelete(item.id)}/>
-                        <FlatButton label="Edit"/>
+                        <IconButton tooltip="delete this item" onClick={() => onItemDelete(item.id)}>
+                            <ActionDelete />
+                        </IconButton>
                     </CardActions>
                 </Card>
             </div>)}

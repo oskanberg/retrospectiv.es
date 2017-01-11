@@ -66,7 +66,7 @@ class NewBoard extends React.Component {
                 <form onSubmit={this.confirmNewBoard.bind(this)}>
                     <div className="row" style={this.styles.inputArea}>
                         <div className="col-xs-12 col-md-6 col-md-offset-3">
-                            <TextField value={this.state.name} floatingLabelText="Enter Board Name" multiLine={false} fullWidth={true} onChange={this.updateNameInput.bind(this)}/>
+                            <TextField value={this.state.name} floatingLabelText="Enter Board Name" multiLine={false} fullWidth={true} onChange={this.updateNameInput.bind(this)} autoFocus/>
                             <RaisedButton type="submit" label="Add New Board" style={this.styles.button} primary={true}/>
                         </div>
                     </div>

@@ -12,7 +12,7 @@ let styles = {
     itemsSection: {
         padding: '2em',
         paddingTop: '10em',
-        minHeight: '500px'
+        minHeight: window.innerHeight
     },
     tabs: {
         paddingTop: '4.6em',

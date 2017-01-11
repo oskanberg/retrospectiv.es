@@ -17,7 +17,8 @@ const styles = {
 class Welcome extends React.Component {
     render() {
         return <section id="welcome-message" className="col-xs-12 col-md-6 col-md-offset-3" style={styles.message}>
-            <h3>Welcome to retrospectiv.es!</h3>
+            <h3>Welcome to retrospectiv.es alpha!</h3>
+            <p>Please be aware that this site is still under development, so your boards are likely to be reset regularly.</p>
             <Link to='/new'>
                 <RaisedButton style={styles.createNewBoard} label="Create New Board" labelPosition="before" primary={true} icon={(
                     <FontIcon className="material-icons">

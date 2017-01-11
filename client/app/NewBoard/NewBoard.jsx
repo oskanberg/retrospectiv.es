@@ -1,9 +1,11 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {createNewBoard} from '../actions';
 import AddItemContainer from '../AddItem/AddItemContainer';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import {connect} from 'react-redux';
-import {createNewBoard} from '../actions';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 
 class NewBoard extends React.Component {
 
@@ -30,29 +32,46 @@ class NewBoard extends React.Component {
         };
 
         this.state = {
-            name: ''
+            name: '',
+            modalOpen: false
         };
     }
 
-    updateNameInput(e) {
-        this.setState({name: e.target.value});
+    handleClose() {
+        this.setState({modalOpen: false});
     }
 
-    addNewBoard(e) {
-        this.dispatch(createNewBoard(this.state.name));
+    updateNameInput(e) {
+        this.setState(Object.assign(this.state, {name: e.target.value}));
+    }
+
+    confirmNewBoard(e) {
+        this.setState(Object.assign(this.state, {modalOpen: true}));
         e.preventDefault();
     }
 
+    addNewBoard() {
+        this.setState(Object.assign(this.state, {modalOpen: false}));
+        this.dispatch(createNewBoard(this.state.name));
+    }
+
     render() {
+        const actions = [(<FlatButton label="Cancel" primary={true} onTouchTap={this.handleClose.bind(this)}/>), (<FlatButton label="I understand" primary={true} keyboardFocused={true} onTouchTap={this.addNewBoard.bind(this)}/>)];
+
         return (
-            <form onSubmit={this.addNewBoard.bind(this)}>
-                <div className="row" style={this.styles.inputArea}>
-                    <div className="col-xs-12 col-md-6 col-md-offset-3">
-                        <TextField value={this.state.name} floatingLabelText="Enter Board Name" multiLine={false} fullWidth={true} onChange={this.updateNameInput.bind(this)}/>
-                        <RaisedButton type="submit" label="Add New Board" style={this.styles.button} primary={true}/>
+            <div>
+                <Dialog title="Warning!" actions={actions} modal={false} open={this.state.modalOpen} onRequestClose={this.handleClose.bind(this)}>
+                    This application is in active development. Your boards may be removed without notice!
+                </Dialog>
+                <form onSubmit={this.confirmNewBoard.bind(this)}>
+                    <div className="row" style={this.styles.inputArea}>
+                        <div className="col-xs-12 col-md-6 col-md-offset-3">
+                            <TextField value={this.state.name} floatingLabelText="Enter Board Name" multiLine={false} fullWidth={true} onChange={this.updateNameInput.bind(this)}/>
+                            <RaisedButton type="submit" label="Add New Board" style={this.styles.button} primary={true}/>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         );
     }
 

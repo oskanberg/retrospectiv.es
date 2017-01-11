@@ -4,9 +4,13 @@
   "description": "Web client for retrospectiv.es",
   "main": "server.js",
   "scripts": {
+    "clean": "rm -rf ./build/",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "build": "ENVIRONMENT=production node node_modules/webpack/bin/webpack.js -p && cp index.html build/",
+    "docker-build": "docker build -t oskanberg/retrospectives-client .",
+    "docker-dist": "docker push oskanberg/retrospectives-client",
+    "dist": "npm run clean && npm run build && npm run docker-build && npm run docker-dist",
     "dev": "ENVIRONMENT=development node node_modules/webpack/bin/webpack.js -d --watch"
   },
   "author": "Oliver Skanberg-Tippen",

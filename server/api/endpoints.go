@@ -7,7 +7,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/oskanberg/retrospectiv.es/server/models"
-	"github.com/oskanberg/retrospectiv.es/server/util"
+	uuid "github.com/satori/go.uuid"
 )
 
 /*
@@ -126,7 +126,7 @@ func (a *api) AddItemToSpecificBoard(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	newItem.SetID(util.NewRandomIdentifier())
+	newItem.SetID(uuid.NewV4().String())
 
 	board.AddItem(newItem)
 	log.Println("Added new item to board", boardID)

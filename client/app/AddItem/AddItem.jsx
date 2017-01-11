@@ -4,7 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
 import TextField from 'material-ui/TextField';
 import AppBar from 'material-ui/AppBar';
-import NavigationClose from 'material-ui/svg-icons/navigation/close';
+import NavigationBack from 'material-ui/svg-icons/navigation/arrow-back';
 import {Link} from 'react-router';
 
 const styles = {
@@ -55,7 +55,7 @@ class AddItem extends React.Component {
         return (
             <div>
                 <AppBar title={"Add New Item"} iconElementLeft={(
-                    <IconButton onClick={this.props.onViewClose}><NavigationClose/></IconButton>
+                    <IconButton onClick={this.props.onViewClose}><NavigationBack/></IconButton>
                 )} iconElementRight={(<FlatButton label="Save" onClick={this.addItem.bind(this)}/>)}></AppBar>
 
                 <div className="col-xs-12 col-md-6 col-md-offset-3" style={styles.inputArea}>

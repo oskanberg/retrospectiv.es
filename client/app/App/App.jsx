@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import ItemListContainer from '../ItemList/ItemListContainer';
 import BoardContainer from '../Board/BoardContainer';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import Menu from 'material-ui/Menu';
@@ -10,11 +11,18 @@ import MenuItem from 'material-ui/MenuItem';
 import FontIcon from 'material-ui/FontIcon';
 import {Link} from 'react-router';
 
+import theme from '../theme';
+
 const styles = {
     drawer: {
         overflow: 'hidden'
+    },
+    background: {
+        backgroundColor: theme.palette.backgroundColor
     }
 };
+
+const muiTheme = getMuiTheme(theme);
 
 class App extends React.Component {
     constructor(props) {
@@ -45,8 +53,8 @@ class App extends React.Component {
     }
 
     render() {
-        return <MuiThemeProvider>
-            <div>
+        return <MuiThemeProvider muiTheme={muiTheme}>
+            <div style={styles.background}>
                 <AppBar onLeftIconButtonTouchTap={this.handleDrawerToggle.bind(this)} title="retrospectiv.es" style={{
                     position: 'fixed'
                 }} zDepth={0}/>

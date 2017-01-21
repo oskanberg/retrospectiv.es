@@ -10,14 +10,17 @@ import {
     CardText
 } from 'material-ui/Card';
 
+import sjcl from 'sjcl';
+
 const styles = {
     card: {
         'marginBottom': '2em'
     }
 };
 
-const getDeterministicRandom = (i) => {
-    return i % 12345;
+const hash = (text) => {
+    let bitArray = sjcl.hash.sha256.hash(text);
+    return sjcl.codec.hex.fromBits(bitArray);
 };
 
 const ItemList = ({items, onItemDelete}) => {
@@ -25,13 +28,13 @@ const ItemList = ({items, onItemDelete}) => {
         <div>
             {items.map((item, index) => <div key={item.id}>
                 <Card style={styles.card}>
-                    <CardHeader avatar={`https://api.adorable.io/avatars/50/${getDeterministicRandom(index)}`}/>
+                    <CardHeader avatar={`https://api.adorable.io/avatars/50/${hash(item.content)}`}/>
                     <CardText>
                         {item.content}
                     </CardText>
                     <CardActions>
                         <IconButton tooltip="delete this item" onClick={() => onItemDelete(item.id)}>
-                            <ActionDelete />
+                            <ActionDelete/>
                         </IconButton>
                     </CardActions>
                 </Card>

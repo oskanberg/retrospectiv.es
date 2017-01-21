@@ -44,7 +44,7 @@ const tabs = [
     }
 ];
 
-export default class Board extends React.Component {
+export default class MobileBoard extends React.Component {
 
     constructor(props) {
         super(props);

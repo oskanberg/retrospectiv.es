@@ -1,7 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import Board from './Board';
+import MobileBoard from './MobileBoard';
+import DesktopBoard from './DesktopBoard';
 import {selectBoard, updateBoard} from '../actions';
+import MediaQuery from 'react-responsive';
 
 const UPDATE_INTERVAL_MS = 7500;
 
@@ -27,7 +29,16 @@ class BoardContainer extends React.Component {
     }
 
     render() {
-        return <Board itemsByCategory={this.props.itemsByCategory} selectedBoard={this.props.id}></Board>;
+        return <MediaQuery minWidth={1024}>
+            {(matches) => {
+                if (matches) {
+                    return <DesktopBoard itemsByCategory={this.props.itemsByCategory} selectedBoard={this.props.id}></DesktopBoard>;
+                }
+                if (!matches) {
+                    return <MobileBoard itemsByCategory={this.props.itemsByCategory} selectedBoard={this.props.id}></MobileBoard>;
+                }
+            }}
+        </MediaQuery>;
     }
 }
 

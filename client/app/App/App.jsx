@@ -18,7 +18,8 @@ const styles = {
         overflow: 'hidden'
     },
     background: {
-        backgroundColor: theme.palette.backgroundColor
+        backgroundColor: theme.palette.backgroundColor,
+        height: '100%'
     }
 };
 

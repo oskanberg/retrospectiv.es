@@ -14,7 +14,13 @@ import sjcl from 'sjcl';
 
 const styles = {
     card: {
-        'marginBottom': '2em'
+        marginBottom: '2em'
+    },
+    headerText: {
+        paddingRight: '16px'
+    },
+    headerRoot: {
+        padding: '16px 56px 16px 16px'
     }
 };
 
@@ -28,10 +34,7 @@ const ItemList = ({items, onItemDelete}) => {
         <div>
             {items.map((item, index) => <div key={item.id}>
                 <Card style={styles.card}>
-                    <CardHeader avatar={`https://api.adorable.io/avatars/50/${hash(item.content)}`}/>
-                    <CardText>
-                        {item.content}
-                    </CardText>
+                    <CardHeader textStyle={styles.headerText} style={styles.headerRoot} subtitle={item.content} avatar={`https://api.adorable.io/avatars/50/${hash(item.content)}`}/>
                     <CardActions>
                         <IconButton tooltip="delete this item" onClick={() => onItemDelete(item.id)}>
                             <ActionDelete/>

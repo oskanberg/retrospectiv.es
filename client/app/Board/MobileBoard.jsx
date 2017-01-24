@@ -6,7 +6,7 @@ import SwipeableViews from 'react-swipeable-views';
 import ItemListContainer from '../ItemList/ItemListContainer';
 import AddItemContainer from '../AddItem/AddItemContainer';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
+import ContentCreate from 'material-ui/svg-icons/content/create';
 
 let styles = {
     itemsSection: {
@@ -72,7 +72,7 @@ export default class MobileBoard extends React.Component {
                 </SwipeableViews>
                 <Link to={`/board/${this.props.selectedBoard}/add/${tabs[this.state.slideIndex].id}`}>
                     <FloatingActionButton secondary={true} style={styles.addNewButton}>
-                        <ContentAdd/>
+                        <ContentCreate />
                     </FloatingActionButton>
                 </Link>
             </div>

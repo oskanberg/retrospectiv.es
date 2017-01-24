@@ -43,6 +43,7 @@ function posts(state = {
                 isFetching: false,
                 invalidated: false,
                 items: action.items,
+                title: action.title,
                 lastUpdated: action.receivedAt
             });
         default:

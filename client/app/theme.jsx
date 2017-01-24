@@ -1,4 +1,7 @@
 import {
+    blueGrey400,
+    orange900,
+    blue800,
     cyan500,
     cyan700,
     pinkA200,
@@ -16,16 +19,31 @@ import spacing from 'material-ui/styles/spacing';
 export default {
     spacing : spacing,
     fontFamily : 'Roboto, sans-serif',
+    card: {
+        subtitleColor: "#425957"
+    },
     palette : {
         backgroundColor: grey100,
-        primary1Color: cyan500,
+
+        // App bar
+        primary1Color: "#D96666",
         primary2Color: cyan700,
         primary3Color: grey400,
-        accent1Color: pinkA200,
+        subtitleColor: cyan700,
+
+        sectionHeader: fade(darkBlack, 0.3),
+
+        // Action button
+        // accent1Color: "#81AC8B",
+        accent1Color: "#81AC8B",
         accent2Color: grey100,
         accent3Color: grey500,
-        textColor: darkBlack,
+
+        // text colour
+        textColor: blueGrey400,
+        selectedTextColor: darkBlack,
         alternateTextColor: white,
+
         canvasColor: white,
         borderColor: grey300,
         disabledColor: fade(darkBlack, 0.3),

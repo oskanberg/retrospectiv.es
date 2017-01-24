@@ -1,6 +1,9 @@
 import React, {PropTypes} from 'react';
 import IconButton from 'material-ui/IconButton';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
+import ThumbUp from 'material-ui/svg-icons/action/thumb-up';
+import Edit from 'material-ui/svg-icons/image/edit';
+
 import {
     Card,
     CardActions,
@@ -21,6 +24,10 @@ const styles = {
     },
     headerRoot: {
         padding: '16px 56px 16px 16px'
+    },
+    subtitle: {
+        fontWeight: 100,
+        fontSize: 20
     }
 };
 
@@ -34,10 +41,16 @@ const ItemList = ({items, onItemDelete}) => {
         <div>
             {items.map((item, index) => <div key={item.id}>
                 <Card style={styles.card}>
-                    <CardHeader textStyle={styles.headerText} style={styles.headerRoot} subtitle={item.content} avatar={`https://api.adorable.io/avatars/50/${hash(item.content)}`}/>
+                    <CardHeader textStyle={styles.headerText} style={styles.headerRoot} subtitleStyle={styles.subtitle} subtitle={item.content} avatar={`https://api.adorable.io/avatars/50/${hash(item.content)}`}/>
                     <CardActions>
                         <IconButton tooltip="delete this item" onClick={() => onItemDelete(item.id)}>
                             <ActionDelete/>
+                        </IconButton>
+                        <IconButton tooltip="i agree" disabled={true}>
+                            <ThumbUp/>
+                        </IconButton>
+                        <IconButton tooltip="edit" disabled={true}>
+                            <Edit/>
                         </IconButton>
                     </CardActions>
                 </Card>

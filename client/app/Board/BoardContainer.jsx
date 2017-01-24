@@ -26,6 +26,7 @@ class BoardContainer extends React.Component {
 
     componentWillUnmount() {
         clearInterval(this.state.intervalId);
+        document.title = "retrospectiv.es";
     }
 
     render() {
@@ -45,13 +46,18 @@ class BoardContainer extends React.Component {
 const mapStateToProps = (state, ownProps) => {
     const {boards} = state;
     const board = boards[ownProps.params.boardId] || [];
+    console.log(board.title);
     const boardItems = board.items || [];
+    const boardTitle = board.title || "retrospectiv.es";
+    document.title = boardTitle;
+
     let itemsByCategory = {};
     for (let item of boardItems) {
         itemsByCategory[item.category] = itemsByCategory[item.category] || [];
         itemsByCategory[item.category].push(item);
     }
-    return {id: ownProps.params.boardId, itemsByCategory: itemsByCategory};
+
+    return {id: ownProps.params.boardId, boardTitle, itemsByCategory};
 };
 
 export default connect(mapStateToProps)(BoardContainer);

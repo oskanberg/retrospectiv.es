@@ -41,9 +41,7 @@ export function addBoardItem(boardId, item) {
 
 export function deleteBoardItem(boardId, itemId) {
     return dispatch => {
-        return fetch(`https://api.retrospectiv.es/api/boards/${boardId}/items/${itemId}`, {
-            method: "DELETE"
-        }).catch(response => dispatch(boardItemDeleteError(boardId, itemId, response))).then(response => dispatch(updateBoard(boardId)));
+        return fetch(`https://api.retrospectiv.es/api/boards/${boardId}/items/${itemId}`, {method: "DELETE"}).catch(response => dispatch(boardItemDeleteError(boardId, itemId, response))).then(response => dispatch(updateBoard(boardId)));
     };
 }
 
@@ -89,7 +87,7 @@ function requestBoardUpdate(boardId) {
 }
 
 function receiveBoardUpdate(boardId, json) {
-    return {type: RECEIVE_BOARD_UPDATE, boardId, items: json.items, receivedAt: Date.now()};
+    return {type: RECEIVE_BOARD_UPDATE, boardId, items: json.items, title: json.title, receivedAt: Date.now()};
 }
 
 function newBoardError(error) {

@@ -7,6 +7,7 @@ import ItemListContainer from '../ItemList/ItemListContainer';
 import AddItemContainer from '../AddItem/AddItemContainer';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentCreate from 'material-ui/svg-icons/content/create';
+import tabs from '../categories';
 
 let styles = {
     itemsSection: {
@@ -30,19 +31,6 @@ let styles = {
         // height: window.innerHeight
     }
 };
-
-const tabs = [
-    {
-        id: 'plus',
-        icon: 'add'
-    }, {
-        id: 'delta',
-        icon: 'change_history'
-    }, {
-        id: 'action',
-        icon: 'playlist_add_check'
-    }
-];
 
 export default class MobileBoard extends React.Component {
 

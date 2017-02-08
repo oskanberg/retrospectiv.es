@@ -8,6 +8,7 @@ import AddItemContainer from '../AddItem/AddItemContainer';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentCreate from 'material-ui/svg-icons/content/create';
 import theme from '../theme';
+import categories from '../categories';
 
 const styles = {
     itemsSection: {
@@ -44,22 +45,6 @@ const styles = {
     }
 };
 
-const tabs = [
-    {
-        id: 'plus',
-        title: 'Plusses',
-        icon: 'add'
-    }, {
-        id: 'delta',
-        title: 'Deltas',
-        icon: 'change_history'
-    }, {
-        id: 'action',
-        title: 'Actions',
-        icon: 'playlist_add_check'
-    }
-];
-
 export default class DesktopBoard extends React.Component {
 
     constructor(props) {
@@ -77,9 +62,9 @@ export default class DesktopBoard extends React.Component {
         return (
             <div style={styles.itemsSection}>
                 <div className="row">
-                    {tabs.map((tab, i) => {
+                    {categories.map((tab, i) => {
                         return (
-                            <section id={tab.id} key={tab.id} className="col-sm-4" style={(i === tabs.length - 1)
+                            <section id={tab.id} key={tab.id} className="col-sm-4" style={(i === categories.length - 1)
                                 ? styles.itemsWithoutBorder
                                 : styles.itemsWithBorder}>
                                 <h2 style={styles.tabHeading}>
@@ -91,7 +76,7 @@ export default class DesktopBoard extends React.Component {
                     })}
                 </div>
 
-                <Link to={`/board/${this.props.selectedBoard}/add/${tabs[this.state.slideIndex].id}`}>
+                <Link to={`/board/${this.props.selectedBoard}/add/${categories[this.state.slideIndex].id}`}>
                     <FloatingActionButton secondary={true} style={styles.addNewButton}>
                         <ContentCreate/>
                     </FloatingActionButton>

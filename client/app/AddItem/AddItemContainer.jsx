@@ -4,6 +4,7 @@ import {addBoardItem} from '../actions';
 import {connect} from 'react-redux';
 
 class AddItemContainer extends React.Component {
+
     constructor(props) {
         super(props);
     }
@@ -24,6 +25,7 @@ class AddItemContainer extends React.Component {
 
         return <AddItem selectedBoard={this.props.selectedBoard} selectedCategory={this.props.category} onAddItem={onAddItem.bind(this)} onViewClose={onViewClose.bind(this)}/>;
     }
+    
 }
 
 const mapStateToProps = (state, ownProps) => {
